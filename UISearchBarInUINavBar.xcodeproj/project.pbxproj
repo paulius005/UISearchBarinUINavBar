@@ -14,6 +14,7 @@
 		0FD2CD131A733734000437FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2CD121A733734000437FF /* Images.xcassets */; };
 		0FD2CD161A733734000437FF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2CD141A733734000437FF /* LaunchScreen.xib */; };
 		0FD2CD221A733734000437FF /* UISearchBarInUINavBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD2CD211A733734000437FF /* UISearchBarInUINavBarTests.m */; };
+		0FD2CD2D1A733760000437FF /* PDSearchExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD2CD2C1A733760000437FF /* PDSearchExampleTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		0FD2CD1B1A733734000437FF /* UISearchBarInUINavBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UISearchBarInUINavBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FD2CD201A733734000437FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FD2CD211A733734000437FF /* UISearchBarInUINavBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISearchBarInUINavBarTests.m; sourceTree = "<group>"; };
+		0FD2CD2B1A733760000437FF /* PDSearchExampleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDSearchExampleTableViewController.h; path = ../PDSearchExampleTableViewController.h; sourceTree = "<group>"; };
+		0FD2CD2C1A733760000437FF /* PDSearchExampleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDSearchExampleTableViewController.m; path = ../PDSearchExampleTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 		0FD2CD041A733734000437FF /* UISearchBarInUINavBar */ = {
 			isa = PBXGroup;
 			children = (
+				0FD2CD2B1A733760000437FF /* PDSearchExampleTableViewController.h */,
+				0FD2CD2C1A733760000437FF /* PDSearchExampleTableViewController.m */,
 				0FD2CD091A733734000437FF /* AppDelegate.h */,
 				0FD2CD0A1A733734000437FF /* AppDelegate.m */,
 				0FD2CD0C1A733734000437FF /* ViewController.h */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FD2CD2D1A733760000437FF /* PDSearchExampleTableViewController.m in Sources */,
 				0FD2CD0E1A733734000437FF /* ViewController.m in Sources */,
 				0FD2CD0B1A733734000437FF /* AppDelegate.m in Sources */,
 				0FD2CD081A733734000437FF /* main.m in Sources */,

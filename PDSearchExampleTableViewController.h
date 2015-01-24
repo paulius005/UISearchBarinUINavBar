@@ -9,5 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface PDSearchExampleTableViewController : UITableViewController
+{
+    BOOL searching;
+}
+
+@property (strong, nonatomic) UISearchBar *searchBar;
+@property (strong, nonatomic) NSMutableArray *sampleDataArray;
+@property (strong, nonatomic) NSMutableArray *filteredSampleDataArray;
+
+
+- (IBAction)searchButtonClicked:(id)sender;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "PDSearchExampleTableViewController.h"
 
-@interface PDSearchExampleTableViewController ()
+@interface PDSearchExampleTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @end
 
@@ -17,11 +17,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _searchBar.delegate = self;
+    _sampleDataArray = [[NSMutableArray alloc] init];
+    _filteredSampleDataArray = [[NSMutableArray alloc] init];
+    [_sampleDataArray addObject:@"a"];
+    [_sampleDataArray addObject:@"ab"];
+    [_sampleDataArray addObject:@"abc"];
+    [_sampleDataArray addObject:@"abcd"];
+    [_sampleDataArray addObject:@"abcde"];
+    [_sampleDataArray addObject:@"abcdef"];
+    [_sampleDataArray addObject:@"abcdefg"];
+    [_sampleDataArray addObject:@"abcdefgh"];
+    [_sampleDataArray addObject:@"abcdefghi"];
+    [_sampleDataArray addObject:@"abcdefghij"];
+    [_sampleDataArray addObject:@"abcdefghijk"];
+    [_sampleDataArray addObject:@"abcdefghijkl"];
+    [_sampleDataArray addObject:@"abcdefghijklm"];
+    [_sampleDataArray addObject:@"abcdefghijklmn"];
+    [_sampleDataArray addObject:@"abcdefghijklmno"];
+    [_sampleDataArray addObject:@"abcdefghijklmnop"];
+    [_sampleDataArray addObject:@"Lorem"];
+    [_sampleDataArray addObject:@"Ipsum"];
+
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +56,81 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    if (searching) {
+        return [_filteredSampleDataArray count];
+    } else {
+        return [_sampleDataArray count];
+    }
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sampleSearchCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    
+    if (searching) {
+        cell.textLabel.text = [_filteredSampleDataArray objectAtIndex:indexPath.row];
+    } else {
+        cell.textLabel.text = [_sampleDataArray objectAtIndex:indexPath.row];
+    }
     
     return cell;
 }
-*/
+
+- (IBAction)searchButtonClicked:(id)sender {
+    self.navigationItem.rightBarButtonItem = nil;
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.delegate = self;
+    _searchBar.placeholder = @"Search Sample Data";
+    [_searchBar sizeToFit];
+    self.navigationItem.titleView = _searchBar;
+    [_searchBar becomeFirstResponder];
+    [_searchBar.window makeKeyAndVisible];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [_searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searching = NO;
+    [self.tableView reloadData];
+    self.navigationItem.titleView = nil;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonClicked:)];
+    [_searchBar setShowsCancelButton:NO];
+    [_searchBar resignFirstResponder];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [_filteredSampleDataArray removeAllObjects];
+    
+    if ([searchText length] != 0) {
+        searching = YES;
+        [self searchData];
+    } else {
+        searching = NO;
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchData {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", _searchBar.text];
+    NSArray *tempArray = [_sampleDataArray filteredArrayUsingPredicate:predicate];
+        NSLog(@"%@", tempArray);
+    _filteredSampleDataArray = [NSMutableArray arrayWithArray:tempArray];
+}
 
 /*
 // Override to support conditional editing of the table view.
