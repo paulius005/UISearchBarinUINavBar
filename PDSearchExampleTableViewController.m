@@ -128,7 +128,7 @@
 - (void)searchData {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", _searchBar.text];
     NSArray *tempArray = [_sampleDataArray filteredArrayUsingPredicate:predicate];
-        NSLog(@"%@", tempArray);
+    NSLog(@"%@", tempArray);
     _filteredSampleDataArray = [NSMutableArray arrayWithArray:tempArray];
 }
 
